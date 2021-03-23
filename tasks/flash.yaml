@@ -1,0 +1,25 @@
+---
+# Source: https://electrolama.com/radio-docs/flash-cc-bsl/
+- name: Flashing the stick
+  block:
+    - name: Getting the tty of the stick
+      ansible.builtin.shell: "ls -lha /dev/tty*.usb* | awk '{ print $10 }'"
+      register: get_tty
+      changed_when: false
+
+    - name: Get output of the tty of the stick
+      ansible.builtin.debug: 
+        var: get_tty.stdout
+
+    - name: Pausing to confirm tty
+      ansible.builtin.pause:
+        prompt: "Does this tty looks good? Press enter to continue or CTRL+C to exit"
+
+    - name: Flashing the downloaded firmware on the stick
+      ansible.builtin.shell: "python3 {{ work_dir }}/cc2538-bsl-master/cc2538-bsl.py -p {{ get_tty.stdout }} -evw {{ work_dir }}/CC2652R_coordinator_20210120.hex"
+      when: (get_firmware_zipfile.stat.exists == true) or (unzip_firmware_hexfile.changed == true)
+      register: flash_output
+
+    - name: Flashing output
+      ansible.builtin.debug: 
+        var: flash_output.stderr_lines

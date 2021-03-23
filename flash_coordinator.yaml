@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  tasks:
+    # Source: https://electrolama.com/radio-docs/#step-2-download-the-correct-firmware-for-your-stick
+    - name: Run initial setup task
+      import_tasks: tasks/setup.yaml
+      
+    # Manual action: put the stick in BSL mode here
+    - name: Pausing with message to put stick in BSL mode
+      ansible.builtin.pause:
+        prompt: "Insert the ZSH stick with the BSL mode on and press enter. See here for more information: https://electrolama.com/radio-docs/flash-cc-bsl/ -> Put your stick in BSL mode"
+
+    # Source: https://electrolama.com/radio-docs/flash-cc-bsl/
+    - name: Run flash task
+      import_tasks: tasks/flash.yaml
+
+    - name: Displaying follow up message
+      ansible.builtin.debug:
+        msg: 
+          - "Follow these guides to setup your new coordinator:"
+          - "for zigbee2mqtt: https://electrolama.com/radio-docs/zigbee2mqtt/"
+          - "for ZHA home-assistant: https://electrolama.com/radio-docs/zha-home-assistant/"
+          - "Have fun with your newly flashed stick!"
