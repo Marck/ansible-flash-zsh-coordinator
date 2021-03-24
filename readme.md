@@ -1,6 +1,6 @@
 # Ansible playbook for flashing your ZSH coordinator
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![Donate](https://img.shields.io/badge/Donate-coffee-1abc9c.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Marck/flash-zsh-coordinator/graphs/commit-activity)
+[![Donate](https://img.shields.io/badge/Donate-coffee-1abc9c.svg)](https://www.buymeacoffee.com/marcked)
 
 This playbook is based on the steps mentioned on the [Electrolama docs](https://electrolama.com/radio-docs/#step-2-download-the-correct-firmware-for-your-stick).
 
