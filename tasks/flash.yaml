@@ -3,7 +3,7 @@
 - name: Flashing the stick
   block:
     - name: Getting the tty of the stick
-      ansible.builtin.shell: "ls -lha /dev/tty*.usb* | awk '{ print $10 }'"
+      ansible.builtin.shell: "ls -lha /dev/tty*.usb* | awk '{ print $9 }'"
       register: get_tty
       changed_when: false
 
