@@ -10,12 +10,12 @@
           
     - name: Check if ZIP file is not already downloaded at dir
       ansible.builtin.stat:
-        path: "{{ work_dir }}/CC2652R_coordinator_20210120.zip"
+        path: "{{ work_dir }}/CC2652R_coordinator_{{ firmware_version }}.zip"
       register: get_firmware_zipfile
 
     - name: Check if HEX file is not already extracted at dir
       ansible.builtin.stat:
-        path: "{{ work_dir }}/CC2652R_coordinator_20210120.hex"
+        path: "{{ work_dir }}/CC2652R_coordinator_{{ firmware_version }}.hex"
       register: get_firmware_hexfile
 
     - name: Check if Python modules are not already downloaded at "{{ work_dir }}"
@@ -25,15 +25,15 @@
 
     - name: Downloading correct firmware for a CC2652R stick
       ansible.builtin.get_url: 
-        url: https://github.com/Koenkk/Z-Stack-firmware/raw/master/coordinator/Z-Stack_3.x.0/bin/CC2652R_coordinator_20210120.zip
-        dest: "{{ work_dir }}/CC2652R_coordinator_20210120.zip"
+        url: "https://github.com/Koenkk/Z-Stack-firmware/raw/master/coordinator/Z-Stack_3.x.0/bin/CC2652R_coordinator_{{ firmware_version }}.zip"
+        dest: "{{ work_dir }}/CC2652R_coordinator_{{ firmware_version }}.zip"
       when: 
         - create_workdir.state == 'directory'
         - get_firmware_zipfile.stat.exists == false
     
     - name: Unzip downloaded firmware zip
       ansible.builtin.unarchive:
-        src: "{{ work_dir }}/CC2652R_coordinator_20210120.zip"
+        src: "{{ work_dir }}/CC2652R_coordinator_{{ firmware_version }}.zip"
         dest: "{{ work_dir }}"
       when: 
         - create_workdir.state == 'directory'

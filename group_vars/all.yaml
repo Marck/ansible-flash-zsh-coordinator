@@ -1,3 +1,4 @@
 ---
 # Change your work dir if you want the setup files in a different location
 work_dir: ~/Downloads/ZSH_coordinator
+firmware_version: '20230507'

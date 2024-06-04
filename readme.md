@@ -14,7 +14,9 @@ This playbook is based on the steps mentioned on the [Electrolama docs](https://
 To start using this playbook, make sure you have the following prerequisites:
 
 1. ansible, python3 and pip3 installed
-2. changed the `work_dir` variable in `group_vars/all.yaml` to a suitable location.
+2. change the following variables in `group_vars/all.yaml`:
+    - `work_dir`
+    - `firmware_version`
 
 ## Support
 
