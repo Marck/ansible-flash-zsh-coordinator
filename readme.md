@@ -18,6 +18,12 @@ To start using this playbook, make sure you have the following prerequisites:
     - `work_dir`
     - `firmware_version`
 
+## Run it
+
+```bash
+ansible-playbook flash_coordinator.yaml
+```
+
 ## Support
 
 If you want to buy me a cup of coffee (or join my monthly club), that would be highly appreciated.

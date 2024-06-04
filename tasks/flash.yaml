@@ -16,7 +16,14 @@
         prompt: "Does this tty looks good? Press enter to continue or CTRL+C to exit"
 
     - name: Flashing the downloaded firmware on the stick
-      ansible.builtin.shell: "python3 {{ work_dir }}/cc2538-bsl-master/cc2538-bsl.py -p {{ get_tty.stdout }} -evw {{ work_dir }}/CC2652R_coordinator_{{ firmware_version }}.hex"
+      ansible.builtin.shell: |
+        # create and activate virtual env (gitignored)
+        python3 -m venv .venv
+        source .venv/bin/activate
+        # install requirements
+        pip3 install pyserial intelhex
+        # run script
+        python3 {{ work_dir }}/cc2538-bsl-master/cc2538-bsl.py -p {{ get_tty.stdout }} -evw {{ work_dir }}/CC2652R_coordinator_{{ firmware_version }}.hex
       when: (get_firmware_zipfile.stat.exists == true) or (unzip_firmware_hexfile.changed == true)
       register: flash_output
 
